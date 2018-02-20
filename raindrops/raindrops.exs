@@ -10,7 +10,7 @@ defmodule Raindrops do
   """
   @spec convert(pos_integer) :: String.t
   def convert(number) do
-    result = Enum.map([3, 5, 7], &(_randrop_words(number, &1)))
+    result = Enum.map([3, 5, 7], &(_raindrop(number, &1)))
     |> Enum.join ""
 
     if result == "" do
@@ -20,16 +20,10 @@ defmodule Raindrops do
     end
   end
 
-  defp _randrop_words(number, factor) do
-    if rem(number, factor) == 0 do
-      cond do
-        factor == 3 ->
-          "Pling"
-        factor == 5 ->
-          "Plang"
-        factor == 7 ->
-          "Plong"
-      end
-    end
-  end
+  defp _raindrop(n, factor), do: _raindrop_word(rem(n, factor), factor)
+
+  defp _raindrop_word(0, 3), do: "Pling"
+  defp _raindrop_word(0, 5), do: "Plang"
+  defp _raindrop_word(0, 7), do: "Plong"
+  defp _raindrop_word(_, _), do: ""
 end
