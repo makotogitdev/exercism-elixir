@@ -13,11 +13,7 @@ defmodule Raindrops do
     result = Enum.map([3, 5, 7], &(_raindrop(number, &1)))
     |> Enum.join ""
 
-    if result == "" do
-      "#{number}"
-    else
-      result
-    end
+    _process_result(result, number)
   end
 
   defp _raindrop(n, factor), do: _raindrop_word(rem(n, factor), factor)
@@ -26,4 +22,9 @@ defmodule Raindrops do
   defp _raindrop_word(0, 5), do: "Plang"
   defp _raindrop_word(0, 7), do: "Plong"
   defp _raindrop_word(_, _), do: ""
+
+  defp _process_result(text, number), do: _verify_text(text, number)
+
+  defp _verify_text("", number), do: "#{number}"
+  defp _verify_text(text, _number), do: text
 end
