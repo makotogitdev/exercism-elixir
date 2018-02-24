@@ -7,13 +7,16 @@ defmodule RNATranscription do
   iex> RNATranscription.to_rna('ACTG')
   'UGAC'
   """
+
+  @complements %{
+    ?G => ?C,
+    ?C => ?G,
+    ?T => ?A,
+    ?A => ?U
+  }
+
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
-    Enum.map(dna, &(_complement(&1)))
+    Enum.map(dna, &(@complements[&1]))
   end
-
-  defp _complement(?G), do: ?C
-  defp _complement(?C), do: ?G
-  defp _complement(?T), do: ?A
-  defp _complement(?A), do: ?U
 end
